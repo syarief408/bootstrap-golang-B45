@@ -57,10 +57,11 @@ func main() {
 	// Routing
 	e.GET("/hello", helloWorld)
 	e.GET("/", home)
+	e.GET("/", exportData)
 	e.GET("/contact", contact)
 	e.GET("/add-project", addProject)
-	e.GET("/blog-detail/:id", blogDetail) //localhost:5000/blog-detail/0 | :id = url params
-	e.GET("/form-blog", formAddBlog)      //localhost:5000/form-blog
+	e.GET("/project-detail/:id", blogDetail) //localhost:5000/blog-detail/0 | :id = url params
+	e.GET("/form-blog", formAddProject)      //localhost:5000/form-blog
 	e.POST("/post-project", postProject)
 	e.GET("/delete-blog/:id", deleteBlog)          //localhost:5000/add-blog
 
@@ -87,7 +88,7 @@ func main() {
 		return c.Render(http.StatusOK, "addProject.html", nil)
 	}
 
-	func blog(c echo.Context) error {
+	func exportData(c echo.Context) error {
 		blogs := map[string]interface{} {
 			"Blogs": dataBlog,
 		}
@@ -120,11 +121,11 @@ func main() {
 		// 	"Content": "Ketimpangan sumber daya manusia (SDM) di sektor digital masih menjadi isu yang belum terpecahkan. Berdasarkan penelitian ManpowerGroup, ketimpangan SDM global, termasuk Indonesia, meningkat dua kali lipat dalam satu dekade terakhir. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam, molestiae numquam! Deleniti maiores expedita eaque deserunt quaerat! Dicta, eligendi debitis?",
 		// }
 
-		return c.Render(http.StatusOK, "blog-detail.html", detailBlog)
+		return c.Render(http.StatusOK, "projectDetail.html", detailBlog)
 	}
 
-	func formAddBlog(c echo.Context) error {
-		return c.Render(http.StatusOK, "add-blog.html", nil)
+	func formAddProject(c echo.Context) error {
+		return c.Render(http.StatusOK, "addProject.html", nil)
 	}
 
 	func postProject(c echo.Context) error {
